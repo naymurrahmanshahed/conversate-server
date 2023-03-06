@@ -66,4 +66,26 @@ userSchema.statics.register = async function (name, email, password) {
   return user;
 };
 
+userSchema.statics.login = async function (email, password) {
+  //check empty fields
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
+
+  //find user from mongdb
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("No Account Found");
+  }
+
+  const isValidPassword = await bcrypt.compare(password, user.password);
+
+  if (!isValidPassword) {
+    throw Error("Incorrect Password");
+  }
+
+  return user;
+};
+
 module.exports = mongoose.model("User", userSchema);
