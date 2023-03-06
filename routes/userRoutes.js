@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   findUser,
+  getAllUsers,
 } = require("../controllers/userControllers");
 const router = express.Router();
 
@@ -14,5 +15,9 @@ router.post("/login", loginUser);
 
 // find user
 router.get("/find/:userId", findUser);
+
+//getAllUser
+
+router.get("/", getAllUsers);
 
 module.exports = router;
