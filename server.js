@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
-
+const chatRoutes = require("./routes/chatRoutes");
 //express app
 const app = express();
 
@@ -14,6 +14,8 @@ app.use(express.json()); //req for post req
 
 // endpoints
 app.use("/api/user", userRoutes);
+
+app.use("/api/chat", chatRoutes);
 
 //port
 const PORT = process.env.PORT || 4000;
