@@ -28,6 +28,20 @@ const createChat = async (req, res) => {
 
 //find all chat
 
+const findAllChats = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const chats = await chatModel.find({
+      //only one
+      members: { $in: [userId] },
+    });
+    res.status(200).json(chats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 //find a single chat
 
-module.exports = { createChat };
+module.exports = { createChat, findAllChats };
