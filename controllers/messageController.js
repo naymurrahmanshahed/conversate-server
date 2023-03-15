@@ -18,4 +18,18 @@ const createMessage = async (req, res) => {
   }
 };
 
-module.exports = { createMessage };
+//get message
+
+const getMessage = async (req, res) => {
+  const { chatId } = req.params;
+
+  try {
+    const messages = await messageModel.find({ chatId });
+
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { createMessage, getMessage };
